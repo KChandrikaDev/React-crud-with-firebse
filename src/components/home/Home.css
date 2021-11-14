@@ -1,0 +1,14 @@
+
+  #home{
+    margin: 100px;
+    padding: 30px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    background-color: rgb(223, 211, 211);
+    
+}
+
+  

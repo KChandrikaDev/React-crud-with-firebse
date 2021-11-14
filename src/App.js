@@ -1,24 +1,47 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { BrowserRouter, Route,  Switch } from "react-router-dom";
+import {lazy,Suspense} from 'react'
+import Logout from './logout/Logout';
+
+
+
+const Login = lazy(() => import("./login/Login"));
+const Home = lazy(() => import("./components/home/Home"));
+const Header = lazy(() => import("./components/appheader/Header"));
+const AddBooks = lazy(() => import("./components/books/AddBooks"));
+const EditBooks = lazy(() => import("./components/books/EditBooks"));
+const DisplayBooksLists = lazy(() => import("./components/books/DisplayBooksLists"));
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Suspense
+          fallback={
+            <div
+              style={{
+                marginTop: "200px",
+                fontSize: "24px",
+                fontWeight: "300px",
+              }}
+              className=" text-center text-primary"
+            >
+              Loading...
+            </div>
+          }
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <BrowserRouter>
+            <Header />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/login" component={Login} />
+              <Route path="/add/books" component={AddBooks} />
+              <Route path="/edit/bookks/:id" component={EditBooks} />
+              <Route path="/view/books" component={DisplayBooksLists} />
+              <Route exact path="/logout" component={Logout} />
+              </Switch>
+          </BrowserRouter>
+        </Suspense>
   );
 }
 
