@@ -1,8 +1,7 @@
-// import React from "react";
 import "./Login.css";
-import { auth, signInWithGoogle } from "../Firebase";
+import { auth , signInWithGoogle} from "../Firebase";
 import firebase from "../Firebase";
-import { useHistory } from "react-router";
+import '../App.css'
 
 import React, { Component } from "react";
 
@@ -14,7 +13,7 @@ export default class Login extends Component {
       currentUser: null,
     };
 
-    // this.signInWithGoogle= this.signInWithGoogle.bind(this);
+    // this.signInWithGoogle = this.signInWithGoogle.bind(this);
   }
 
   unsubscribeFromAuth = null;
@@ -31,22 +30,25 @@ export default class Login extends Component {
     this.unsubscribeFromAuth();
   }
 
-  //  signInWithGoogle =  () => {
+  isSignin = async()=>{
+   await signInWithGoogle()
+    this.props.history.push('/')
 
-  //    auth.signInWithPopup(this.provider);
-  //   // this.props.history.push('/')
+  }
 
-  //   }
+  
 
   render() {
     return (
-      <div id="login" className="container">
-        <button
-          style={{ minWidth: "200px", fontSize: "24px" }}
-          onClick={signInWithGoogle}
+      <div id="animate-area">
+      {/* <div id="login" className="container"> */}
+        <button className="button p-3"
+          style={{ minWidth: "200px", fontSize: "30px",backgroundColor:"blue" }}
+          onClick={this.isSignin}
         >
           SIGN IN WITH GOOGLE
         </button>
+      {/* </div> */}
       </div>
     );
   }

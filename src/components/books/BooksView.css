@@ -1,0 +1,18 @@
+@media (max-width:768px) {
+   .para{
+       font-size: 14px !important;
+   }
+   
+    
+}
+.para{
+  
+    background-image: linear-gradient( rgb(0, 0, 110),
+    rgb(0, 0, 107),
+    rgb(0, 0, 107));
+    height:50vh
+}
+.right{
+    text-align: right !important;
+}
+

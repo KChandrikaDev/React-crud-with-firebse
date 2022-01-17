@@ -1,4 +1,4 @@
-/* Float four columns side by side */
+Float four columns side by side
 .column {
     /* float: left; */
     width: 30%;
@@ -37,7 +37,7 @@
     padding: 16px;
     /* margin-left: 40px; */
   }
-  #card {
+  #cardDis {
     background: rgba(0, 0, 0, 0.65);
     color: white;
   }
@@ -49,3 +49,61 @@
     text-overflow: ellipsis;
   }
   
+  #container{
+    min-width: 90%;
+    background-color: white;
+}
+.vertical {
+  border-left: 5px solid rgb(179, 44, 44) !important;
+  height: auto;
+}
+.table-focus:hover{
+background-color: rgb(9, 121, 173) !important;
+color: white;
+
+}
+.fa-eye:hover, .fa-eye:focus{
+  color: white !important;
+ }
+ @media (max-width:768px) {
+  /* .table thead{
+    display: none;
+  }
+  .table, .table tbody, .table tr, .table td{
+    display: block;
+    width: 100%;
+  }
+  
+  .table tr{
+    margin-bottom: 15px;
+
+  }
+  .table tbody tr td{
+    text-align: right;
+    padding-left: 50px;
+    position: relative;
+   
+  }
+  .table td:before{
+    content: attr(data-label) !important;
+    background-color:white;
+    color: rgb(12, 12, 12);
+    margin-top: 0px;
+    margin-bottom: 0px;
+    position:absolute;
+    left:0;
+    width: 50%;
+    padding-left: 15px;
+    font-weight: 600;
+    font-size:14px;
+    text-align: left;
+  }
+  .table thead tr th{
+    border: 1px solid black;
+    border-bottom:1px solid black;
+  } */
+  .book-name{
+    display: none;
+  }
+  
+} 

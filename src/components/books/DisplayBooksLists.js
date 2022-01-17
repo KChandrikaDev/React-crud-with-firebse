@@ -1,84 +1,59 @@
-import React, { useEffect, useState } from "react";
-
-import { db } from "../../Firebase";
-import { collection, getDocs, deleteDoc,doc } from "firebase/firestore";
-import { Link } from "react-router-dom";
 import "./DisplayBooksLists.css";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
+import { removeBook } from "../redux/actions/addBookAction";
+import Thead from "../../layOuts/Thead";
+import Tbody from "../../layOuts/Tbody";
+import { Link } from "react-router-dom";
 
-function DisplayBooksLists() {
-  const [books, setBooks] = useState([]);
-  const booksCollection = collection(db, "books");
-
-  useEffect(() => {
-    const getBooks = async () => {
-      const data = await getDocs(booksCollection);
-      console.log("data", data);
-      setBooks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-
-    getBooks();
-  }, []);
-
-
-  const deleteBooks = async (id) => {
-      console.log("id",id)
-    const BooksData = doc(db, "books", id);
-    await deleteDoc(BooksData);
-    window.location.reload();
+class DisplayBooksLists extends Component {
+  deleteBook = (book) => {
+    this.props.removeBook(book);
   };
-
-  return (
-    <>
-      <div className="row mt-2 ps-5 pe-5">
-        {books.map((data) => (
-        
-          <div className="column mt-5 rounded ">
-              
-            <div style={{ minWidth: "100%" }} id="card" className="card">
-            <h4 className="text-primary ps-2">{`${data.authorName}`}</h4>
-              <div className="row">
-                <div className="col-4 span">Book Name</div>
-                <div className="col-2  text-left">:</div>
-                <div className="col-6 span">{data.bookName}</div>
-              </div>
-              <div className="row ">
-                <div className="col-4 span">Author Name</div>
-                <div className="col-2 span text-left">:</div>
-                <div className="col-6 span">{data.authorName}</div>
-              </div>
-              <div className="row ">
-                <div className="col-4 span">Price</div>
-                <div className="col-2 span text-left">:</div>
-                <div className="col-6 span">${data.price}</div>
-              </div>
-
-              <div className="d-flex flex-row-reverse mt-2">
-                <div className="p-2  flex-fill bg-danger">
-                  <button
-                      onClick={() => {
-                        deleteBooks(data.id);
-                      }}
-                    className=" btn-danger ms-1 "
-                  >
-                    <i className="fa fa-trash-o"></i>
-                    Delete
-                  </button>
-                </div>
-                <div className="p-2 bg-success flex-fill ">
-                  <Link className="link " to={`/edit/bookks/${data.id}`}>
-                    <button className="btn-success  ms-3  ">
-                      <i className="fa fa-pencil-square-o"></i>
-                      Edit
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
+  render() {
+    const { booksData } = this.props;
+    console.log("Render", booksData);
+    return (
+      <div id="container" className="container mt-3">
+        <div className="row">
+          <div className="col-md-12">
+            <table className="table">
+              <Thead />
+              <tbody>
+                {booksData ? (
+                  booksData.map((data, index) => (
+                    <Tbody data={data} deleteBook={this.deleteBook} />
+                  ))
+                ) : (
+                  <div>Loading...</div>
+                )}
+              </tbody>
+            </table>
           </div>
-        ))}
+        </div>
       </div>
-    </>
-  );
+    );
+  }
 }
-
-export default DisplayBooksLists;
+const mapStateToProps = (state) => {
+  console.log("state", state.firestore.ordered.Books);
+  // const bookData = state.firestore.ordered.Books;
+  return {
+    booksData: state.firestore.ordered.Books,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeBook: (book) => dispatch(removeBook(book)),
+  };
+};
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect(() => [
+    {
+      collection: "Books",
+    },
+  ])
+)(DisplayBooksLists);

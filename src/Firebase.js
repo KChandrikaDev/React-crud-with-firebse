@@ -1,7 +1,10 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-
+import firestore from 'firebase/compat/firestore'
 import { getFirestore } from "@firebase/firestore";
+const settings = {timestampsInSnapshots: true};
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyB4gIz2xJmCOLFtL76kObCXn-59Bk3Grbw",
   authDomain: "react-firebase-7fb4d.firebaseapp.com",
@@ -12,9 +15,10 @@ const firebaseConfig = {
   measurementId: "G-DH5HN80DKJ",
 };
 
-firebase.initializeApp(firebaseConfig);
+const app=firebase.initializeApp(firebaseConfig);
+// firebase.firestore().settings(settings);
 
-export const db = getFirestore();
+export const db = getFirestore(app);
 
 export const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();

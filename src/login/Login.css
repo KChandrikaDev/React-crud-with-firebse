@@ -1,12 +1,15 @@
-#login{
- 
-   
-    margin: 100px;
-    padding: 30px;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.8;
-    background-color: rgb(17, 7, 7);
+@media (max-width:768px) {
+    .button{
+        font-size: 16px !important;
+    }
 }
+.button{
+    min-width: 90%;
+    color: white;
+    background-color: #d87093;
+    font-weight: 700;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .button:focus,.button:hover{
+    background-image: linear-gradient(45deg,#ff0000,rgb(25, 31, 23),#ff0000);
+  }

@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,35 @@
   to {
     transform: rotate(360deg);
   }
+} */
+@keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+#animate-area {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  /* padding-bottom: 60px; */
+  background:linear-gradient(rgb(0,0,0,.3),rgb(0,0,0,.3)), url(https://source.unsplash.com/random) repeat;
+  /* background-image: url(../../images/b2.jpg); */
+  background-position: 0px 0px;
+  /* background-repeat: repeat-y; */
+  animation: animatedBackground 10s linear infinite alternate;
+  /* background-size: cover; */
+
+min-width: 100%;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-transform: capitalize;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
